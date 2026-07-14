@@ -28,18 +28,6 @@
 
 ---
 
-## 📸 Screenshots
-
-<div align="center">
-
-| 🏠 Home Page | 🛍️ Products Page |
-|:---:|:---:|
-| ![Home](src/main/webapp/images/home_banner.jpg) | *Product Catalog with 33+ Items* |
-
-</div>
-
----
-
 ## ✨ Features
 
 <div align="center">
