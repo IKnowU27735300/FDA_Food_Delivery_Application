@@ -95,6 +95,13 @@ INSERT INTO categories (id, name, description) VALUES
 (3, 'Accessories', 'Premium bags, sunglasses, hats, and details to complete the look.')
 ON DUPLICATE KEY UPDATE name=VALUES(name), description=VALUES(description);
 
+-- Insert Admin User (for Admin Panel access at /admin)
+-- Credentials: admin@fashionvault.com / admin123
+INSERT INTO users (full_name, email, phone, password, address, role) VALUES
+('Fashion Vault Admin', 'admin@fashionvault.com', '0000000000', 'admin123', 'Admin HQ', 'ADMIN')
+ON DUPLICATE KEY UPDATE role='ADMIN';
+
+
 -- Insert Sample Products
 INSERT INTO products (id, name, description, price, image_url, category_id) VALUES
 (1, 'Classic Denim Jacket', 'A timeless utility denim jacket crafted from durable, premium cotton denim. Features chest button pockets, welt side pockets, and adjustable tab buttons at the back waist. Perfect for casual layering.', 1899.00, 'images/denim_jacket.jpg', 1),

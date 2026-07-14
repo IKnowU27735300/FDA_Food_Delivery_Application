@@ -397,10 +397,14 @@ User clicks "Add to Cart"
 | `/login?action=logout` | LoginServlet | GET | Logout + invalidate session |
 | `/register` | RegisterServlet | GET/POST | Register form / Create account |
 | `/profile` | ProfileServlet | GET/POST | View / Edit profile |
+| `/admin` | AdminServlet | GET/POST | Hidden admin login (admin@fashionvault.com / admin123) |
+| `/admin/panel` | AdminPanelServlet | GET/POST | Admin control center (Add, Edit, Delete products & variants) |
 
 ---
 
 ## 💡 Key Design Decisions
+
+> **Hidden Admin Portal** — Accessible strictly by typing `/admin` in the browser. There are no links or buttons on the store UI. Authenticates using role `ADMIN` and redirects to the full management dashboard at `/admin/panel`.
 
 > **Guest Cart Merging** — Users can add items to cart without logging in. Items are stored in the `HttpSession`. On login, the guest cart is automatically merged into the database cart.
 
@@ -421,9 +425,9 @@ User clicks "Add to Cart"
 | 📦 Total Products | **33** |
 | 🗂️ Categories | **4** |
 | 🗄️ Database Tables | **8** |
-| ☕ Java Classes | **20** |
-| 📄 JSP Pages | **13** |
-| 🌐 URL Routes | **11** |
+| ☕ Java Classes | **23** |
+| 📄 JSP Pages | **16** |
+| 🌐 URL Routes | **13** |
 | 🖼️ Product Images | **30+** |
 
 </div>

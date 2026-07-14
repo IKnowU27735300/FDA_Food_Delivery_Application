@@ -36,4 +36,9 @@ public class Product {
 
     public int getCategoryId() { return categoryId; }
     public void setCategoryId(int categoryId) { this.categoryId = categoryId; }
+
+    // Extra field for admin display (joined from categories table)
+    private String categoryName;
+    public String getCategoryName() { return categoryName; }
+    public void setCategoryName(String categoryName) { this.categoryName = categoryName; }
 }
