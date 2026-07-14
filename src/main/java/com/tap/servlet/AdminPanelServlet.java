@@ -1,10 +1,9 @@
 package com.tap.servlet;
 
 import com.tap.dao.AdminDAO;
-import com.tap.model.Category;
 import com.tap.model.Product;
 import com.tap.model.ProductVariant;
-import com.tap.model.User;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
