@@ -55,10 +55,13 @@
                     for (Product product : featured) {
             %>
             <div class="product-card glass">
-                <div class="product-image-container">
+                <div class="product-image-container <%= product.getTotalStock() <= 0 ? "out-of-stock" : "" %>">
                     <span class="product-category-tag">
                         <%= product.getCategoryId() == 1 ? "Men" : (product.getCategoryId() == 2 ? "Women" : (product.getCategoryId() == 4 ? "Kids" : "Accessory")) %>
                     </span>
+                    <% if (product.getTotalStock() <= 0) { %>
+                        <div class="out-of-stock-overlay">Out of Stock</div>
+                    <% } %>
                     <a href="<%= request.getContextPath() %>/product?id=<%= product.getId() %>">
                         <img src="<%= request.getContextPath() %>/<%= product.getImageUrl() %>?v=2" alt="<%= product.getName() %>">
                     </a>

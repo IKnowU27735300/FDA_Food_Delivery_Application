@@ -41,4 +41,9 @@ public class Product {
     private String categoryName;
     public String getCategoryName() { return categoryName; }
     public void setCategoryName(String categoryName) { this.categoryName = categoryName; }
+
+    // Extra field for stock overlay
+    private int totalStock;
+    public int getTotalStock() { return totalStock; }
+    public void setTotalStock(int totalStock) { this.totalStock = totalStock; }
 }

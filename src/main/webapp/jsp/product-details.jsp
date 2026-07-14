@@ -53,7 +53,10 @@
 
     <div class="detail-container">
         <!-- Product Image -->
-        <div class="detail-gallery glass">
+        <div class="detail-gallery glass <%= product.getTotalStock() <= 0 ? "out-of-stock" : "" %>">
+            <% if (product.getTotalStock() <= 0) { %>
+                <div class="out-of-stock-overlay">Out of Stock</div>
+            <% } %>
             <img src="<%= request.getContextPath() %>/<%= product.getImageUrl() %>?v=2" alt="<%= product.getName() %>">
         </div>
 
