@@ -26,7 +26,9 @@ public class DBConnection {
             if (host != null && !host.trim().isEmpty()) {
                 port = (port != null && !port.trim().isEmpty()) ? port : "3306";
                 db = (db != null && !db.trim().isEmpty()) ? db : "tap_fashion_db";
-                url = "jdbc:mysql://" + host + ":" + port + "/" + db + "?useSSL=false&allowPublicKeyRetrieval=true";
+                boolean isTiDB = host.contains("tidb") || "4000".equals(port);
+                String sslParams = isTiDB ? "sslMode=VERIFY_IDENTITY" : "useSSL=false&allowPublicKeyRetrieval=true";
+                url = "jdbc:mysql://" + host + ":" + port + "/" + db + "?" + sslParams;
             } else {
                 url = DEFAULT_URL;
             }
