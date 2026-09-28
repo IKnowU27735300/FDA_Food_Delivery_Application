@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Fashion Vault</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/home" class="logo">Fashion Vault</a>
+    </nav>
+
+    <div class="section-container" style="margin-top: 50px; max-width: 900px;">
+        <h1 class="section-title">Shipping & Payment</h1>
+
+        <form id="checkout-form" onsubmit="handleCheckout(event)" style="margin-top: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+            <div class="glass" style="padding: 30px; border-radius: 16px;">
+                <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 20px; color: #fff;">1. Delivery Details</h3>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; font-size: 13px; color: var(--text-muted); margin-bottom: 5px;">Full Name</label>
+                    <input type="text" id="name" required style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(255,255,255,0.05); color: #fff;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; font-size: 13px; color: var(--text-muted); margin-bottom: 5px;">Phone Number</label>
+                    <input type="tel" id="phone" required style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(255,255,255,0.05); color: #fff;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; font-size: 13px; color: var(--text-muted); margin-bottom: 5px;">Delivery Address</label>
+                    <textarea id="address" rows="3" required style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(255,255,255,0.05); color: #fff;"></textarea>
+                </div>
+            </div>
+
+            <div class="glass" style="padding: 30px; border-radius: 16px; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 20px; color: #fff;">2. Payment Method</h3>
+                    <label style="display: flex; align-items: center; gap: 12px; padding: 14px; border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 12px; cursor: pointer; background: rgba(255,255,255,0.02);">
+                        <input type="radio" name="payment" value="COD" checked>
+                        <span>Cash on Delivery (COD)</span>
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 12px; padding: 14px; border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 12px; cursor: pointer; background: rgba(255,255,255,0.02);">
+                        <input type="radio" name="payment" value="UPI">
+                        <span>Instant UPI / QR</span>
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 12px; padding: 14px; border: 1px solid var(--border-color); border-radius: 8px; cursor: pointer; background: rgba(255,255,255,0.02);">
+                        <input type="radio" name="payment" value="CARD">
+                        <span>Debit / Credit Card</span>
+                    </label>
+                </div>
+
+                <div style="margin-top: 30px; border-top: 1px solid var(--border-color); padding-top: 20px;">
+                    <div style="display: flex; justify-content: space-between; font-size: 18px; font-weight: 800; margin-bottom: 20px; color: #fff;">
+                        <span>Amount to Pay:</span>
+                        <span style="color: var(--accent-color);" id="checkout-total">₹0.00</span>
+                    </div>
+                    <button type="submit" class="btn-premium" style="width: 100%; padding: 14px; border-radius: 8px; font-size: 16px;">
+                        Place Order
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const cart = JSON.parse(localStorage.getItem('fv_cart') || '[]');
+        if (cart.length === 0) {
+            window.location.href = '/cart';
+        }
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        document.getElementById('checkout-total').textContent = `₹${total.toFixed(2)}`;
+
+        function handleCheckout(e) {
+            e.preventDefault();
+            const order = {
+                id: 'ORD-' + Math.floor(100000 + Math.random() * 900000),
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                address: document.getElementById('address').value,
+                payment: document.querySelector('input[name="payment"]:checked').value,
+                items: cart,
+                total: total,
+                date: new Date().toLocaleDateString()
+            };
+            localStorage.setItem('fv_last_order', JSON.stringify(order));
+            localStorage.removeItem('fv_cart');
+            window.location.href = '/order-success';
+        }
+    </script>
+</body>
+</html>

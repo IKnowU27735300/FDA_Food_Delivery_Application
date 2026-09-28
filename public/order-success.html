@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmed - Fashion Vault</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/home" class="logo">Fashion Vault</a>
+    </nav>
+
+    <div class="section-container" style="margin-top: 60px; max-width: 600px; text-align: center;">
+        <div class="glass" style="padding: 50px 30px; border-radius: 20px;">
+            <div style="width: 80px; height: 80px; border-radius: 50%; background: rgba(74, 222, 128, 0.15); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <h1 style="font-size: 28px; font-weight: 800; color: #fff; margin-bottom: 10px;">Order Placed Successfully!</h1>
+            <p style="color: var(--text-secondary); margin-bottom: 25px;">Thank you for shopping with Fashion Vault. Your order has been registered.</p>
+            
+            <div id="order-info" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; text-align: left; margin-bottom: 30px;">
+                <!-- Injected by JS -->
+            </div>
+
+            <a href="/home" class="btn-premium" style="display: inline-block; padding: 12px 30px; border-radius: 8px;">Continue Shopping</a>
+        </div>
+    </div>
+
+    <script>
+        const order = JSON.parse(localStorage.getItem('fv_last_order') || '{}');
+        if (order.id) {
+            document.getElementById('order-info').innerHTML = `
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px;">
+                    <span style="color: var(--text-muted);">Order Number:</span>
+                    <strong style="color: var(--accent-color);">${order.id}</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px;">
+                    <span style="color: var(--text-muted);">Recipient:</span>
+                    <strong style="color: #fff;">${order.name} (${order.phone})</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px;">
+                    <span style="color: var(--text-muted);">Total Amount:</span>
+                    <strong style="color: #4ade80;">₹${Number(order.total).toFixed(2)}</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 14px;">
+                    <span style="color: var(--text-muted);">Payment:</span>
+                    <strong style="color: #fff;">${order.payment}</strong>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
